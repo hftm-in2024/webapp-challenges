@@ -1,0 +1,7 @@
+{
+  "name": "webapp-challenges",
+  "version": "1.0.0",
+  "description": "BugHunt Challenges für HFTM Web Applications Kurs",
+  "private": true,
+  "license": "MIT"
+}

@@ -1,0 +1,57 @@
+{
+  "challenge": "chaos-app",
+  "title": "The Chaos App — Lagerverwaltung",
+  "description": "Eine Lagerverwaltungs-App mit 5 absichtlichen Bugs in JavaScript. Die Studierenden sollen die Bugs finden und direkt in script.js fixen.",
+  "source_file": "script.js",
+  "total_bugs": 5,
+  "bugs": [
+    {
+      "id": 1,
+      "title": "String statt Number",
+      "description": "Ein Produktpreis ist als String statt als Number definiert, was bei Addition zu String-Konkatenation führt.",
+      "symptom": "Endpreis Maus zeigt '3010' statt 40",
+      "hint_if_not_found": "Schau dir die Datentypen der Produktpreise genauer an. Was passiert, wenn JavaScript einen String mit + verknüpft?",
+      "location": "products Array, Zeile ~9"
+    },
+    {
+      "id": 2,
+      "title": "Fehlendes Property",
+      "description": "Ein Produkt hat kein stock-Property, was bei der Berechnung zu NaN führt.",
+      "symptom": "Gesamtwert Lager zeigt NaN",
+      "hint_if_not_found": "Vergleiche die Produkt-Objekte miteinander. Haben alle die gleichen Properties?",
+      "location": "products Array, Zeile ~10"
+    },
+    {
+      "id": 3,
+      "title": "Fehlende Null-Prüfung",
+      "description": "Eine Funktion greift auf ein Objekt zu, das undefined sein kann (find() mit ungültiger ID).",
+      "symptom": "TypeError: Cannot read properties of undefined",
+      "hint_if_not_found": "Was gibt Array.find() zurück, wenn kein Element gefunden wird? Wird das im Code abgefangen?",
+      "location": "applyDiscount Funktion, Zeile ~41-43"
+    },
+    {
+      "id": 4,
+      "title": "Inkonsistente Property-Namen",
+      "description": "Ein Kunden-Objekt verwendet einen anderen Property-Namen als die anderen Objekte im Array.",
+      "symptom": "Willkommen, undefined! bei einem Kunden",
+      "hint_if_not_found": "Schau dir die Kunden-Objekte genau an. Verwenden alle dieselben Property-Namen?",
+      "location": "customers Array, Zeile ~17"
+    },
+    {
+      "id": 5,
+      "title": "null statt Array",
+      "description": "Eine Variable ist null statt ein leeres Array, was beim Aufruf von Array-Methoden crasht.",
+      "symptom": "TypeError: Cannot read properties of null (reading 'filter')",
+      "hint_if_not_found": "Was ist der Unterschied zwischen null und einem leeren Array []? Schau dir an, was an die Filter-Funktion übergeben wird.",
+      "location": "specialOffers Variable, Zeile ~21"
+    }
+  ],
+  "review_rules": {
+    "only_check_file": "script.js",
+    "ignore_files": ["README.md", "package.json", "tsconfig.json", "solution/*"],
+    "partial_fix_examples": [
+      "Bug 3: Nur try-catch statt echtem null-check (funktioniert, aber ist nicht sauber)",
+      "Bug 1: parseInt() statt den Datentyp direkt zu korrigieren"
+    ]
+  }
+}

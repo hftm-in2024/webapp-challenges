@@ -1,0 +1,17 @@
+{
+  "name": "chaos-app",
+  "version": "1.0.0",
+  "description": "Lagerverwaltungs-App mit absichtlichen Bugs — JavaScript Debugging & TypeScript Migration",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "script.js",
+  "scripts": {
+    "start": "node script.js",
+    "start:ts": "npx tsc && node dist/script.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
