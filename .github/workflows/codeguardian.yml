@@ -18,7 +18,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: anthropics/claude-code-action@v1
+      - id: claude
+        uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: "--max-turns 15"
@@ -36,3 +37,22 @@ jobs:
             - Gib nur die Hinweise aus .codeguardian.json bei nicht gefundenen Bugs
             - Bewerte die Qualität der Fixes (korrekt vs. Workaround)
             - Ignoriere Änderungen an Dateien die nicht die Challenge-Quelldatei sind
+
+      - name: Post review as PR comment
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          # Extract the last assistant text message from Claude's execution output
+          jq -r '
+            [.[] | select(.type == "assistant") | .message.content[] | select(.type == "text") | .text] | last // empty
+          ' "$EXECUTION_FILE" > /tmp/review.md 2>/dev/null || true
+
+          if [ ! -s /tmp/review.md ] || grep -q '^null$' /tmp/review.md; then
+            echo "No review text found in execution output"
+            exit 0
+          fi
+
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file /tmp/review.md
+          echo "Review posted as PR comment"
