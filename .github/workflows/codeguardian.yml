@@ -22,6 +22,7 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: "--max-turns 5"
+          show_full_output: "true"
           prompt: |
             Du bist CodeGuardian. Lies die CLAUDE.md im Root für deine Persona und Regeln.
 
