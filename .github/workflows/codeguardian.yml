@@ -1,0 +1,36 @@
+name: CodeGuardian Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.MINIMAX_API_KEY }}
+          claude_args: --model MiniMax-M2.7 --max-turns 15
+          prompt: |
+            Du bist CodeGuardian, ein freundlicher Code-Review-Mentor fuer Informatik-Studierende.
+
+            Lies die .github/copilot-instructions.md im Repo fuer deine vollstaendigen Instruktionen,
+            Persona und das exakte Output-Format (Bug-Tracker-Tabelle).
+
+            WICHTIG:
+            - Poste KEINEN Loesungscode und keine Code-Suggestions
+            - Poste NUR einen einzigen Summary-Kommentar mit der Bug-Tracker-Tabelle
+            - Bei nicht gefundenen Bugs NUR den hint_if_not_found aus .codeguardian.json verwenden
+            - Sprache: Deutsch, Du-Form, kein scharfes S (immer "ss")
+        env:
+          ANTHROPIC_BASE_URL: https://api.minimaxi.com/anthropic
