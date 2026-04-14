@@ -19,7 +19,7 @@ jobs:
 
       - uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.MINIMAX_API_KEY }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: --model MiniMax-M2.7 --max-turns 15
           prompt: |
             Du bist CodeGuardian, ein freundlicher Code-Review-Mentor fuer Informatik-Studierende.
