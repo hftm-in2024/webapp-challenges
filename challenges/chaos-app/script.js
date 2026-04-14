@@ -6,7 +6,7 @@
 // --- DATENQUELLE ---
 const products = [
     { id: 1, title: "Tastatur", price: 50, stock: 12 },
-    { id: 2, title: "Maus", price: "30", stock: 5 },
+    { id: 2, title: "Maus", price: 30, stock: 5 },
     { id: 3, title: "Monitor", price: 200 }
 ];
 
@@ -14,7 +14,7 @@ const shippingCosts = 10;
 
 const customers = [
     { id: 1, name: "Anna Müller", email: "anna@example.ch" },
-    { id: 2, firstName: "Beat Keller", email: "beat@example.ch" },
+    { id: 2, name: "Beat Keller", email: "beat@example.ch" },
     { id: 3, name: "Carla Rossi", email: "carla@example.ch" }
 ];
 
@@ -39,6 +39,10 @@ function calculateTotalValue(items) {
 // 3. Produkt suchen & Rabatt (Gefahr von Runtime-Crash bei falscher ID)
 function applyDiscount(productId, discount) {
     const product = products.find(p => p.id === productId);
+    if (!product) {
+        console.log(`Produkt mit ID ${productId} nicht gefunden!`);
+        return;
+    }
     product.price -= discount;
     console.log(`Neuer Preis für ${product.title}: ${product.price}`);
 }
