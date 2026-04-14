@@ -67,7 +67,7 @@ jobs:
           # Call MiniMax API (Anthropic-compatible)
           RESPONSE=$(curl -s -X POST "https://api.minimaxi.com/anthropic/v1/messages" \
             -H "Content-Type: application/json" \
-            -H "x-api-key: $MINIMAX_API_KEY" \
+            -H "Authorization: Bearer $MINIMAX_API_KEY" \
             -H "anthropic-version: 2023-06-01" \
             -d "$PAYLOAD")
 
