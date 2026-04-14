@@ -74,6 +74,9 @@ jobs:
           # Extract the review text
           REVIEW=$(echo "$RESPONSE" | jq -r '[.content[] | select(.type=="text") | .text] | first // empty')
 
+          # Strip markdown codeblock wrapper if present
+          REVIEW=$(echo "$REVIEW" | sed '/^```markdown$/d; /^```$/d')
+
           if [ -z "$REVIEW" ]; then
             echo "Error: No review generated"
             echo "API Response: $RESPONSE"

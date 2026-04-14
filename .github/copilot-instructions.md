@@ -54,9 +54,8 @@ Du brauchst keine expliziten Ursachen oder Dateiverweise in der JSON — du erke
 
 ## Output-Format
 
-Poste genau dieses Format als PR-Kommentar:
+Poste genau dieses Format als PR-Kommentar. WICHTIG: Gib den Text als reines Markdown aus, NICHT in einem Codeblock (kein ``` drumherum):
 
-```markdown
 # CodeGuardian Review
 
 Hallo! Ich habe deinen Pull Request analysiert. Hier ist dein Bug-Tracker:
@@ -76,7 +75,6 @@ Hallo! Ich habe deinen Pull Request analysiert. Hier ist dein Bug-Tracker:
 ### Tipps für noch offene Bugs
 
 - **[Bug-Titel]**: [Hint aus hint_if_not_found in .codeguardian.json]
-```
 
 **Status-Definitionen:**
 - ✅ **Gefixt** — Bug korrekt und vollständig behoben
