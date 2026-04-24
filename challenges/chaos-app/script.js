@@ -6,8 +6,8 @@
 // --- DATENQUELLE ---
 const products = [
     { id: 1, title: "Tastatur", price: 50, stock: 12 },
-    { id: 2, title: "Maus", price: "30", stock: 5 },
-    { id: 3, title: "Monitor", price: 200 }
+    { id: 2, title: "Maus", price: 30, stock: 5 },
+    { id: 3, title: "Monitor", price: 200, stock: 8 }
 ];
 
 const shippingCosts = 10;
@@ -39,6 +39,10 @@ function calculateTotalValue(items) {
 // 3. Produkt suchen & Rabatt (Gefahr von Runtime-Crash bei falscher ID)
 function applyDiscount(productId, discount) {
     const product = products.find(p => p.id === productId);
+    if (!product) {
+        console.log(`Produkt mit ID ${productId} nicht gefunden!`);
+        return;
+    }
     product.price -= discount;
     console.log(`Neuer Preis für ${product.title}: ${product.price}`);
 }
@@ -50,6 +54,7 @@ function printCustomerGreeting(customer) {
 
 // 5. Günstige Produkte filtern
 function getAffordableProducts(items, maxPrice) {
+    if (!items) return [];
     return items.filter(item => item.price <= maxPrice);
 }
 
