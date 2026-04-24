@@ -6,8 +6,8 @@
 // --- DATENQUELLE ---
 const products = [
     { id: 1, title: "Tastatur", price: 50, stock: 12 },
-    { id: 2, title: "Maus", price: "30", stock: 5 },
-    { id: 3, title: "Monitor", price: 200 }
+    { id: 2, title: "Maus", price: 30, stock: 5 },
+    { id: 3, title: "Monitor", price: 200, stock: 3 },
 ];
 
 const shippingCosts = 10;
