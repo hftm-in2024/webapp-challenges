@@ -28,11 +28,7 @@ interface SupportTicket {
 }
 
 // TODO: Refactor — does this interface look familiar?
-interface TicketPreview {
-  title: string;
-  priority: Priority;
-  status: "open" | "in-progress" | "resolved" | "closed";
-}
+type TicketPreview = Pick<SupportTicket, "title" | "priority" | "status">;
 
 // TODO: Refactor — look at how many properties are copied from SupportTicket
 interface CreateTicketData {
