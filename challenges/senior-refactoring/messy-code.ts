@@ -34,13 +34,7 @@ type TicketPreview = Pick<SupportTicket, "title" | "priority" | "status">;
 type CreateTicketData = Omit<SupportTicket, "id" | "createdAt" | "updatedAt">;
 
 // TODO: Refactor — this interface looks suspiciously similar to the one above
-interface UpdateTicketData {
-  title?: string;
-  description?: string;
-  priority?: Priority;
-  status?: "open" | "in-progress" | "resolved" | "closed";
-  assignee?: string;
-}
+type UpdateTicketData = Partial<SupportTicket>;
 
 // --- Utility functions ---
 
