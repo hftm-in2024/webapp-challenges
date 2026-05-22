@@ -3,7 +3,6 @@
 // =============================================================================
 
 // --- Priority configuration ---
-
 const PRIORITY_LABELS = {
   low: "Low Priority",
   medium: "Medium Priority",
@@ -12,7 +11,7 @@ const PRIORITY_LABELS = {
 } as const;
 
 // TODO: Refactor — this type duplicates information that already exists above
-type Priority = "low" | "medium" | "high" | "critical";
+type Priority = keyof typeof PRIORITY_LABELS;
 
 // --- Main entity ---
 
@@ -34,7 +33,7 @@ type TicketPreview = Pick<SupportTicket, "title" | "priority" | "status">;
 type CreateTicketData = Omit<SupportTicket, "id" | "createdAt" | "updatedAt">;
 
 // TODO: Refactor — this interface looks suspiciously similar to the one above
-type UpdateTicketData = Partial<SupportTicket>;
+type UpdateTicketData = Partial<CreateTicketData>;
 
 // --- Utility functions ---
 
