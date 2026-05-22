@@ -12,7 +12,7 @@ const PRIORITY_LABELS = {
 } as const;
 
 // TODO: Refactor — this type duplicates information that already exists above
-type Priority = "low" | "medium" | "high" | "critical";
+type Priority = keyof typeof PRIORITY_LABELS;
 
 // --- Main entity ---
 
@@ -28,29 +28,13 @@ interface SupportTicket {
 }
 
 // TODO: Refactor — does this interface look familiar?
-interface TicketPreview {
-  title: string;
-  priority: Priority;
-  status: "open" | "in-progress" | "resolved" | "closed";
-}
+type TicketPreview = Pick<SupportTicket, 'title'| 'priority' | 'status'>;
 
 // TODO: Refactor — look at how many properties are copied from SupportTicket
-interface CreateTicketData {
-  title: string;
-  description: string;
-  priority: Priority;
-  status: "open" | "in-progress" | "resolved" | "closed";
-  assignee: string;
-}
+type CreateTicketData = Omit<SupportTicket, 'id' | 'assignee' | 'createdAt'| 'updatedAt'>; 
 
 // TODO: Refactor — this interface looks suspiciously similar to the one above
-interface UpdateTicketData {
-  title?: string;
-  description?: string;
-  priority?: Priority;
-  status?: "open" | "in-progress" | "resolved" | "closed";
-  assignee?: string;
-}
+type UpdateTicketData = Partial<SupportTicket>;
 
 // --- Utility functions ---
 
