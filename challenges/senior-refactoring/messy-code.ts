@@ -16,41 +16,25 @@ type Priority = "low" | "medium" | "high" | "critical";
 
 // --- Main entity ---
 
-interface SupportTicket {
-  id: string;
-  title: string;
-  description: string;
-  priority: Priority;
-  status: "open" | "in-progress" | "resolved" | "closed";
-  assignee: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+  interface SupportTicket {
+    id: string;
+    title: string;
+    description: string;
+    priority: Priority;
+    status: "open" | "in-progress" | "resolved" | "closed";
+    assignee: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
 
 // TODO: Refactor — does this interface look familiar?
-interface TicketPreview {
-  title: string;
-  priority: Priority;
-  status: "open" | "in-progress" | "resolved" | "closed";
-}
+interface TicketPreview extends Pick<SupportTicket, "title" | "priority" | "status"> {}
 
 // TODO: Refactor — look at how many properties are copied from SupportTicket
-interface CreateTicketData {
-  title: string;
-  description: string;
-  priority: Priority;
-  status: "open" | "in-progress" | "resolved" | "closed";
-  assignee: string;
-}
+interface CreateTicketData extends Omit<SupportTicket, "id" | "createdAt" | "updatedAt"> {}
 
 // TODO: Refactor — this interface looks suspiciously similar to the one above
-interface UpdateTicketData {
-  title?: string;
-  description?: string;
-  priority?: Priority;
-  status?: "open" | "in-progress" | "resolved" | "closed";
-  assignee?: string;
-}
+interface UpdateTicketData extends Pick<SupportTicket, "title" | "description" | "priority" | "status" | "assignee"> {}
 
 // --- Utility functions ---
 
