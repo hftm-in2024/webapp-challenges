@@ -1,8 +1,8 @@
 name: CodeGuardian Review
 
 on:
-  pull_request:
-    types: [opened, synchronize]
+  pull_request_target:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: read
@@ -14,6 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: Get PR diff
@@ -39,14 +40,19 @@ jobs:
       - name: Run CodeGuardian Review
         if: steps.config.outputs.has_config == 'true'
         env:
-          MINIMAX_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
           GH_TOKEN: ${{ github.token }}
         run: |
+          if [ -z "$MINIMAX_API_KEY" ]; then
+            echo "Error: MINIMAX_API_KEY secret is not set in this repository."
+            echo "Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
           DIFF=$(cat /tmp/pr-diff.txt)
           CONFIG=$(cat /tmp/codeguardian.json)
           INSTRUCTIONS=$(cat .github/copilot-instructions.md)
 
-          # Build the API request
           PAYLOAD=$(jq -n \
             --arg model "MiniMax-M2.7" \
             --arg system "$INSTRUCTIONS" \
@@ -64,26 +70,30 @@ jobs:
               ]
             }')
 
-          # Call MiniMax API (Anthropic-compatible)
-          RESPONSE=$(curl -s -X POST "https://api.minimax.io/anthropic/v1/messages" \
+          HTTP_RESPONSE=$(curl -sS -w "\n%{http_code}" -X POST "https://api.minimax.io/anthropic/v1/messages" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $MINIMAX_API_KEY" \
             -H "anthropic-version: 2023-06-01" \
             -d "$PAYLOAD")
 
-          # Extract the review text
-          REVIEW=$(echo "$RESPONSE" | jq -r '[.content[] | select(.type=="text") | .text] | first // empty')
+          HTTP_CODE=$(printf '%s' "$HTTP_RESPONSE" | tail -n1)
+          BODY=$(printf '%s' "$HTTP_RESPONSE" | sed '$d')
 
-          # Strip markdown codeblock wrapper if present
-          REVIEW=$(echo "$REVIEW" | sed '/^```markdown$/d; /^```$/d')
-
-          if [ -z "$REVIEW" ]; then
-            echo "Error: No review generated"
-            echo "API Response: $RESPONSE"
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "API error (HTTP $HTTP_CODE):"
+            echo "$BODY"
             exit 1
           fi
 
-          # Post as PR comment
+          REVIEW=$(printf '%s' "$BODY" | jq -r '[.content[]? | select(.type=="text") | .text] | first // empty')
+          REVIEW=$(printf '%s' "$REVIEW" | sed '/^```markdown$/d; /^```$/d')
+
+          if [ -z "$REVIEW" ]; then
+            echo "Error: No review text in API response"
+            echo "$BODY"
+            exit 1
+          fi
+
           gh pr comment ${{ github.event.pull_request.number }} --body "$REVIEW"
 
       - name: Post no-config notice
