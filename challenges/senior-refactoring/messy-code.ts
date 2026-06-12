@@ -86,19 +86,8 @@ function toPreview(ticket: SupportTicket): TicketPreview {
   };
 }
 
-// TODO: Refactor — is there a more concise way to type this object?
-function countByStatus(tickets: SupportTicket[]): {
-  open: number;
-  "in-progress": number;
-  resolved: number;
-  closed: number;
-} {
-  const counts: {
-    open: number;
-    "in-progress": number;
-    resolved: number;
-    closed: number;
-  } = {
+function countByStatus(tickets: SupportTicket[]): Record<SupportTicket["status"], number> {
+  const counts: Record<SupportTicket["status"], number> = {
     open: 0,
     "in-progress": 0,
     resolved: 0,
@@ -111,7 +100,6 @@ function countByStatus(tickets: SupportTicket[]): {
 
   return counts;
 }
-
 // --- Demo usage ---
 
 const ticket = createTicket({
@@ -138,3 +126,24 @@ console.log("Preview:", preview);
 const allTickets = [ticket, updated];
 const stats = countByStatus(allTickets);
 console.log("Stats:", stats);
+
+
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+  inStock: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+function wrapInArray<T>(value: T): T[]{
+    return [value];
+};
+
+console.log(wrapInArray(42))
+wrapInArray("hello") 
+wrapInArray({ name: "Test" })
