@@ -9,7 +9,7 @@ import { ProductCardComponent } from './product-card.component';
   template: `
     <h2>Produktkatalog</h2>
 
-    @if (products().length >= 0) {
+    @if (products().length > 0) {
       <div class="product-grid">
         @for (product of products(); track product.id) {
           <app-product-card
