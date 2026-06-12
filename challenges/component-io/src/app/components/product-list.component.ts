@@ -9,15 +9,9 @@ import { ProductCardComponent } from './product-card.component';
   template: `
     <h2>Produktkatalog</h2>
 
-<<<<<<< Updated upstream
-    @if (products().length === 0) {
-      <div class="product-grid">
-        @for (product of products(); track product.titel) {
-=======
     @if (products().length !== 0) {
       <div class="product-grid">
         @for (product of products(); track product.id) {
->>>>>>> Stashed changes
           <app-product-card
             [product]="product"
             (liked)="handleLike($event)"
