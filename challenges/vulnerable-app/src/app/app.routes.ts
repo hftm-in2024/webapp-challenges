@@ -10,7 +10,6 @@ export const routes: Routes = [
   { path: 'notes', component: NotesComponent },
   { path: 'notes/:id', component: NoteDetailComponent },
   { path: 'login', component: LoginComponent },
-  // TODO: add auth guard later
   { path: 'admin', component: AdminComponent },
   { path: 'profile', component: ProfileComponent },
   { path: '**', redirectTo: 'notes' },

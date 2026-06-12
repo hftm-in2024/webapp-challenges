@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatStepperModule } from '@angular/material/stepper'; // nicht verwendet
-import { MatMenuModule } from '@angular/material/menu';       // nicht verwendet
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-about',
@@ -11,8 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';       // nicht verwendet
     MatCardModule,
     MatIconModule,
     MatListModule,
-    MatStepperModule, // importiert, aber nicht im Template verwendet
-    MatMenuModule,    // importiert, aber nicht im Template verwendet
+    MatStepperModule,
+    MatMenuModule,
   ],
   template: `
     <h1>Über EventHub</h1>

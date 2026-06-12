@@ -22,50 +22,80 @@ In diesem Repository findest du verschiedene Coding-Challenges: BugHunts, Refact
 
 ## So funktioniert's (BugHunt & Refactoring)
 
-### 1. Repository forken
+> **Wichtig: Arbeite nie direkt auf `main`.**
+> Dein `main` ist dein sauberer Startpunkt für jede neue Challenge. Sobald du dort Code änderst oder eine eigene Lösung hineinmergst, landet diese Lösung im nächsten Pull Request mit drin und der Review wird unbrauchbar. Lass `main` immer unangetastet und arbeite ausschliesslich auf deinen Challenge-Branches.
 
-Klicke oben rechts auf **Fork**, um eine eigene Kopie des Repos zu erstellen.
+### 1. Repository forken (einmalig)
 
-### 2. Challenge auswählen
+Klicke oben rechts auf **Fork**, um eine eigene Kopie des Repos unter deinem GitHub-Account zu erstellen.
 
-Jede Challenge liegt in einem eigenen Ordner unter `challenges/`. Starte mit der Challenge, die im Unterricht angegeben wird.
+Klone das Repo danach lokal:
+
+```bash
+git clone https://github.com/<dein-username>/webapp-challenges.git
+cd webapp-challenges
+```
+
+### 2. `main` aktualisieren (pro Challenge)
+
+Stelle sicher, dass du die neuesten Challenges hast und von einem sauberen Stand startest:
+
+1. Gehe auf GitHub zu **deinem Fork** und klicke auf **Sync fork → Update branch**
+2. Hole die Änderungen lokal:
+
+```bash
+git switch main
+git pull
+```
 
 ### 3. Branch erstellen
 
-Erstelle einen neuen Branch für deine Lösung:
+Erstelle einen neuen Branch für deine Lösung (Beispiel für die `chaos-app`):
 
 ```bash
-git checkout -b fix/challenge-name
+git switch -c challenge-chaos-app
 ```
+
+Halte dich an das Schema `challenge-<challenge-name>`, dann ist im Pull Request sofort erkennbar, um welche Challenge es geht.
 
 ### 4. Aufgabe lösen
 
-Öffne die Challenge, lies die README und löse die Aufgabe (Bugs fixen / Code refactoren).
+Öffne die Challenge, lies die **README.md** und löse die Aufgabe (Bugs fixen / Code refactoren). Schau dir auch die **`.codeguardian.json`** an — dort stehen die Symptome der Bugs.
 
-### 5. Pull Request erstellen
-
-Committe deine Änderungen und erstelle einen Pull Request **gegen das Original-Repository** (nicht deinen Fork):
+### 5. Commit und Push
 
 ```bash
 git add .
-git commit -m "fix: challenge-name gelöst"
-git push origin fix/challenge-name
+git commit -m "fix: Lagermenge wird jetzt korrekt berechnet"
+git push -u origin challenge-chaos-app
 ```
 
-Dann auf GitHub: **New Pull Request** → Base: `hftm-in2024/webapp-challenges` `main` ← Compare: `dein-fork` `fix/challenge-name`
+### 6. Pull Request erstellen
 
-### 6. CodeGuardian Feedback anfordern
+Nach dem Push zeigt dir GitHub einen Banner **"Compare & pull request"**. Klicke darauf und prüfe, dass der PR gegen das Original-Repo geht:
 
-Klicke im Pull Request auf das **Copilot-Icon** (✨) neben dem Reviewer-Feld und wähle **"Review pull request"**. CodeGuardian analysiert deinen Diff und postet einen Review-Kommentar mit:
+- **base repository:** `hftm-in2024/webapp-challenges`, **base:** `main`
+- **head repository:** `<dein-username>/webapp-challenges`, **compare:** `challenge-chaos-app`
 
-- Welche Bugs/Probleme du gefunden hast
-- Ob die Fixes/Refactorings korrekt sind
-- Tipps für noch nicht gelöste Probleme
-- Deinem Fortschritt (z.B. "3/5 Bugs gefixt")
+GitHub setzt das bei einem Fork normalerweise automatisch richtig.
 
-> Voraussetzung: Du benötigst GitHub Copilot — kostenlos für Studierende über das [GitHub Student Developer Pack](https://education.github.com/pack).
+Schreibe eine kurze Beschreibung: Welche Bugs hast du gefunden? Was war die Ursache? Wie hast du sie gefixt?
 
-> **Hinweis:** CodeGuardian funktioniert nur bei BugHunt- und Refactoring-Challenges (Ordner mit `.codeguardian.json`).
+### 7. CodeGuardian-Review abwarten
+
+Sobald du deinen Pull Request erstellst, startet **CodeGuardian** automatisch als GitHub Action. Der Review-Bot analysiert deinen Code-Diff und gibt dir Feedback:
+
+- Welche Bugs du korrekt gefixt hast
+- Ob es noch offene Probleme gibt
+- Ob deine Fixes sauber umgesetzt sind
+
+Das Review erscheint als Kommentar in deinem Pull Request. Lies das Feedback aufmerksam durch.
+
+> **Hinweis:** CodeGuardian basiert auf KI. Das Feedback ist meistens hilfreich, aber nicht unfehlbar. Falls etwas unklar ist, frag den Dozenten.
+
+### Für die nächste Challenge
+
+Beginne wieder bei **Schritt 2**: `main` aktualisieren, neuen Branch erstellen (z.B. `challenge-<naechste-app>`), lösen, Pull Request. Deinen alten Pull Request lässt du einfach offen — merge ihn **nicht** in deinen `main`.
 
 ---
 
@@ -90,6 +120,6 @@ Klicke im Pull Request auf das **Copilot-Icon** (✨) neben dem Reviewer-Feld un
 ## Regeln
 
 - Fixe nur die Bugs / löse nur die gestellte Aufgabe — ändere nicht die grundlegende Struktur des Codes
-- Jeder Bug-Fix sollte in einem eigenen Commit sein (best practice)
+- Ein Commit pro Bug ist eine gute Praxis, aber nicht Pflicht
 - Du darfst `console.log` und den VS Code Debugger verwenden
 - Bei Homework-Challenges: KI-Einsatz ist erlaubt, aber dokumentiere was du getan hast

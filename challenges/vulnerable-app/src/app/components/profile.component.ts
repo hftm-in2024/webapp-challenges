@@ -3,8 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AuthService } from '../services/auth.service';
 
-// Vulnerability #4: Unsafe URL construction -- user input used in link without validation
-
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -75,10 +73,7 @@ export class ProfileComponent {
   generateShareLink() {
     if (!this.displayName.trim()) return;
 
-    // Build a "share" URL using user input directly
-    // The user controls the displayName value -- this is unsafe
     const url = `javascript:alert('Profil von: ${this.displayName}')`;
-    // We bypass URL sanitization so the link works with special characters
     this.shareLink.set(this.sanitizer.bypassSecurityTrustUrl(url));
     this.shareLinkDisplay.set(`securenotes.app/profile/share?name=${this.displayName}`);
   }

@@ -54,7 +54,7 @@ jobs:
           INSTRUCTIONS=$(cat .github/copilot-instructions.md)
 
           PAYLOAD=$(jq -n \
-            --arg model "MiniMax-M2.7" \
+            --arg model "MiniMax-M3" \
             --arg system "$INSTRUCTIONS" \
             --arg diff "$DIFF" \
             --arg config "$CONFIG" \

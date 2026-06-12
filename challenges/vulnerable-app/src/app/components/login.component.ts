@@ -3,8 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-// Vulnerability #7: Open Redirect via returnUrl query parameter
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -48,7 +46,6 @@ export class LoginComponent {
       // After login, redirect to the returnUrl if present
       const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
       if (returnUrl) {
-        // Redirect directly -- no validation on the URL!
         window.location.href = returnUrl;
       } else {
         window.location.href = '/notes';

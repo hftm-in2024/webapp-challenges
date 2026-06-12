@@ -1,8 +1,5 @@
 // Simuliert eine "schwere" Export-Library.
 // In einer echten App wäre das z.B. jsPDF, xlsx oder chart.js.
-// Diese Datei wird aktuell direkt importiert — das bläht das Initial Bundle auf,
-// obwohl der Export nur selten genutzt wird.
-
 import { AppEvent } from '../data/mock-data';
 
 export function exportToCsv(events: AppEvent[]): string {
@@ -31,7 +28,6 @@ export function downloadCsv(csv: string, filename: string): void {
   URL.revokeObjectURL(url);
 }
 
-// Weitere "schwere" Hilfsfunktionen, die den Bundle aufblähen
 export function generateReport(events: AppEvent[]): string {
   const totalRevenue = events.reduce((sum, e) => sum + e.price * e.attendees, 0);
   const avgAttendees = Math.round(events.reduce((sum, e) => sum + e.attendees, 0) / events.length);

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatTableModule } from '@angular/material/table';   // nicht verwendet
-import { MatSortModule } from '@angular/material/sort';     // nicht verwendet
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { EVENTS, calculateStats } from '../../data/mock-data';
 import { StatsWidgetComponent } from './stats-widget.component';
 
@@ -13,8 +13,8 @@ import { StatsWidgetComponent } from './stats-widget.component';
     MatCardModule,
     MatIconModule,
     MatDividerModule,
-    MatTableModule, // importiert, aber nicht im Template verwendet
-    MatSortModule,  // importiert, aber nicht im Template verwendet
+    MatTableModule,
+    MatSortModule,
     StatsWidgetComponent,
   ],
   template: `
@@ -46,8 +46,6 @@ import { StatsWidgetComponent } from './stats-widget.component';
 
     <mat-divider />
 
-    <!-- Diese Statistik-Komponente ist schwer und wird nur sichtbar,
-         wenn der User nach unten scrollt. Kandidat für @defer. -->
     <app-stats-widget [stats]="stats" />
   `,
 })

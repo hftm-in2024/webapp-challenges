@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatSnackBarModule } from '@angular/material/snack-bar'; // nicht verwendet
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EVENTS } from '../../data/mock-data';
 
 @Component({
@@ -18,7 +18,7 @@ import { EVENTS } from '../../data/mock-data';
     MatIconModule,
     MatProgressBarModule,
     MatDividerModule,
-    MatSnackBarModule, // importiert, aber nicht im Template verwendet
+    MatSnackBarModule,
     UpperCasePipe,
   ],
   template: `

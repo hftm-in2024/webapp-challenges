@@ -7,8 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatRadioModule } from '@angular/material/radio';         // nicht verwendet
-import { MatCheckboxModule } from '@angular/material/checkbox';   // nicht verwendet
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-settings',
@@ -21,8 +21,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';   // nicht verwe
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
-    MatRadioModule,     // importiert, aber nicht im Template verwendet
-    MatCheckboxModule,  // importiert, aber nicht im Template verwendet
+    MatRadioModule,
+    MatCheckboxModule,
   ],
   template: `
     <h1>Einstellungen</h1>

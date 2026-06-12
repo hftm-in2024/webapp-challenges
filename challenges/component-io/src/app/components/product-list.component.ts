@@ -9,13 +9,9 @@ import { ProductCardComponent } from './product-card.component';
   template: `
     <h2>Produktkatalog</h2>
 
-    <!-- BUG-4: @if-Bedingung ist invertiert -->
     @if (products().length === 0) {
       <div class="product-grid">
-        <!-- BUG-3: track product.titel statt product.id (Feld existiert nicht) -->
         @for (product of products(); track product.titel) {
-          <!-- BUG-1: [produkt] statt [product] (falscher Property-Name) -->
-          <!-- BUG-2: (onLiked) statt (liked) (falscher Output-Name) -->
           <app-product-card
             [produkt]="product"
             (onLiked)="handleLike($event)"

@@ -8,8 +8,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatSliderModule } from '@angular/material/slider';       // nicht verwendet
-import { MatAutocompleteModule } from '@angular/material/autocomplete'; // nicht verwendet
+import { MatSliderModule } from '@angular/material/slider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-create-event',
@@ -23,8 +23,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'; // nicht
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatSliderModule,        // importiert, aber nicht im Template verwendet
-    MatAutocompleteModule,  // importiert, aber nicht im Template verwendet
+    MatSliderModule,
+    MatAutocompleteModule,
   ],
   template: `
     <h1>Neues Event erstellen</h1>

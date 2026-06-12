@@ -3,9 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { AuthService } from '../services/auth.service';
 
-// Vulnerability #3: No auth guard on this route -- anyone can access /admin
-// Vulnerability #2: bypassSecurityTrustHtml used on user-editable input
-
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -82,8 +79,6 @@ export class AdminComponent {
   }
 
   updateWidget() {
-    // Bypass Angular's security to allow rich HTML rendering
-    // The user can enter any HTML and it will be trusted
     this.trustedWidgetHtml.set(
       this.sanitizer.bypassSecurityTrustHtml(this.widgetHtml)
     );

@@ -17,8 +17,8 @@ import { exportToCsv, downloadCsv } from '../../shared/export-utils';
     MatButtonModule,
     MatChipsModule,
     MatIconModule,
-    MatBadgeModule,   // importiert, aber nicht im Template verwendet
-    MatTooltipModule, // importiert, aber nicht im Template verwendet
+    MatBadgeModule,
+    MatTooltipModule,
   ],
   template: `
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px">

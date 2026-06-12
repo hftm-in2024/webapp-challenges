@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { NotesService, Note } from '../services/notes.service';
 import { AuthService } from '../services/auth.service';
 
-// Vulnerability #1: XSS via innerHTML -- note content and comments rendered as HTML
-
 @Component({
   selector: 'app-note-detail',
   standalone: true,
@@ -19,7 +17,6 @@ import { AuthService } from '../services/auth.service';
         <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem;">
           Von {{ note()!.author }}
         </p>
-        <!-- Render note content as HTML for rich formatting -->
         <div [innerHTML]="note()!.content"></div>
       </div>
 
@@ -28,7 +25,6 @@ import { AuthService } from '../services/auth.service';
         @for (comment of note()!.comments; track $index) {
           <div class="comment">
             <span class="comment-author">{{ comment.author }}:</span>
-            <!-- Render comment as HTML to support formatting -->
             <span [innerHTML]="comment.text"></span>
           </div>
         }
@@ -73,7 +69,7 @@ export class NoteDetailComponent {
     const user = this.auth.getUser();
     this.notesService.addComment(currentNote.id, {
       author: user?.username ?? 'Anonym',
-      text: this.newComment,  // User input rendered as HTML via innerHTML
+      text: this.newComment,
     });
 
     // Refresh note data

@@ -40,7 +40,6 @@ import { required, minLength, email } from '@angular/forms/signal/validators';
         }
       </div>
 
-      <!-- BUG-1: Bedingung ist invertiert — !form.valid() statt form.valid() -->
       <button type="submit" [disabled]="form.valid()">
         Registrieren
       </button>
@@ -123,7 +122,6 @@ export class RegistrationFormComponent {
       validators: [required(), minLength(2)],
     }),
     email: signalFormField('', {
-      // BUG-2: minLength(5) statt email() — prüft nur die Länge, nicht das E-Mail-Format
       validators: [required(), minLength(5)],
     }),
     password: signalFormField('', {

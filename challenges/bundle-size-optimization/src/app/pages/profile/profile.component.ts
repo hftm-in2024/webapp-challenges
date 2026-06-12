@@ -3,8 +3,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatDialogModule } from '@angular/material/dialog';     // nicht verwendet
-import { MatPaginatorModule } from '@angular/material/paginator'; // nicht verwendet
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-profile',
@@ -13,8 +13,8 @@ import { MatPaginatorModule } from '@angular/material/paginator'; // nicht verwe
     MatIconModule,
     MatButtonModule,
     MatChipsModule,
-    MatDialogModule,    // importiert, aber nicht im Template verwendet
-    MatPaginatorModule, // importiert, aber nicht im Template verwendet
+    MatDialogModule,
+    MatPaginatorModule,
   ],
   template: `
     <h1>Mein Profil</h1>

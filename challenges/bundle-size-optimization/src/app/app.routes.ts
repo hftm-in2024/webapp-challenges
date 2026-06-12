@@ -6,8 +6,6 @@ import { CreateEventComponent } from './pages/create-event/create-event.componen
 import { AboutComponent } from './pages/about/about.component';
 import { EventDetailComponent } from './pages/event-detail/event-detail.component';
 
-// Alle Routen werden eager geladen — die gesamte App landet im Initial Bundle.
-
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'event/:id', component: EventDetailComponent },
