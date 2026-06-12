@@ -12,7 +12,7 @@ const PRIORITY_LABELS = {
 } as const;
 
 // TODO: Refactor — this type duplicates information that already exists above
-type Priority = "low" | "medium" | "high" | "critical";
+type Priority = keyof typeof PRIORITY_LABELS;
 
 // --- Main entity ---
 
@@ -34,7 +34,7 @@ interface TicketPreview extends Pick<SupportTicket, "title" | "priority" | "stat
 interface CreateTicketData extends Omit<SupportTicket, "id" | "createdAt" | "updatedAt"> {}
 
 // TODO: Refactor — this interface looks suspiciously similar to the one above
-interface UpdateTicketData extends Pick<SupportTicket, "title" | "description" | "priority" | "status" | "assignee"> {}
+interface UpdateTicketData extends Partial<CreateTicketData> {}
 
 // --- Utility functions ---
 
