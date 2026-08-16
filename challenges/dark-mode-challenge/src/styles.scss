@@ -29,6 +29,21 @@ html {
 //         damit der Browser native Elemente (Scrollbars etc.) anpasst.
 // ============================================================
 
+// Dark Theme
+
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+));
+
+html.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+  color-scheme: dark;
+}
+
 // ============================================================
 // Global Styles
 // ============================================================
