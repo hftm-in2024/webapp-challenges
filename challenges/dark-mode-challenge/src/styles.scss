@@ -17,17 +17,20 @@ html {
 }
 
 // ============================================================
-// TODO: Dark Theme hier definieren
+// Dark Theme
 // ============================================================
-// Tipp 1: Erstelle eine $dark-theme Variable mit mat.define-theme()
-//         und setze theme-type auf 'dark'.
-//
-// Tipp 2: Aktiviere das Dark Theme über eine CSS-Klasse auf <html>,
-//         z.B. html.dark-theme { @include mat.all-component-colors(...); }
-//
-// Tipp 3: Vergiss nicht, auch color-scheme: dark zu setzen,
-//         damit der Browser native Elemente (Scrollbars etc.) anpasst.
-// ============================================================
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+));
+
+html.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+  color-scheme: dark;
+}
 
 // ============================================================
 // Global Styles

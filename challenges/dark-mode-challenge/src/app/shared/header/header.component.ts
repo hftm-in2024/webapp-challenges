@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,4 +10,21 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export class HeaderComponent implements OnInit {
+  isDarkMode = false;
+
+  ngOnInit(): void {
+    this.isDarkMode = localStorage.getItem('theme') === 'dark';
+    this.updateTheme();
+  }
+
+  toggleDarkMode(): void {
+    this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+    this.updateTheme();
+  }
+
+  private updateTheme(): void {
+    document.documentElement.classList.toggle('dark-theme', this.isDarkMode);
+  }
+}

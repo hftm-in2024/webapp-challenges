@@ -4,7 +4,12 @@
 
   <span class="spacer"></span>
 
-  <!-- TODO: Dark Mode Toggle hier einbauen -->
-  <!-- Tipp: mat-icon-button mit 'dark_mode' / 'light_mode' Icon -->
-  <!-- Tipp: Click-Handler, der eine CSS-Klasse auf <html> toggled -->
+  <button
+    mat-icon-button
+    type="button"
+    (click)="toggleDarkMode()"
+    [attr.aria-label]="isDarkMode ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'"
+  >
+    <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
 </mat-toolbar>
