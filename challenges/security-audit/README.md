@@ -36,7 +36,7 @@ Arbeitet zu zweit und findet die **5 Schwachstellen** in der Auth-Implementierun
 
 ### Prüfbereiche
 
-- **Route Guards**: Welcher Guard-Typ wird verwendet? Was passiert bei Lazy Loading?
+- **Route Guards**: Welcher Guard-Typ wird verwendet? Prüft er vor oder nach dem Matching der Route? Welche Alternative gibt es?
 - **Token-Speicherung**: Wo wird das Token gespeichert? Könnte JavaScript es lesen?
 - **Route-Parameter**: Wie werden Routen-Parameter gelesen? Was passiert bei Navigation zwischen Blog-Details?
 - **Token-Validierung**: Wird das Ablaufdatum geprüft?
@@ -59,7 +59,7 @@ Arbeitet zu zweit und findet die **5 Schwachstellen** in der Auth-Implementierun
 - Öffne die DevTools > Application > Local Storage: Was siehst du nach dem Login?
 - Tippe in die Console: `localStorage.getItem('access_token')` — Was passiert?
 - Navigiere zwischen Blog-Details hin und her (z.B. Blog 1 > Blog 2 via "Weitere Beiträge"): Aktualisiert sich die Anzeige?
-- Navigiere ohne Login direkt zu `/create`: Öffne den Network Tab — wird ein Chunk geladen?
+- Navigiere ohne Login direkt zu `/create`: Der Guard leitet dich um. Wurde die Route dafür zuerst gematcht? Was würde `canMatch` anders machen als `canActivate`?
 - Schau dir `auth.service.ts` an: Welche Konfiguration ist sichtbar? Was fehlt beim Token-Lesen?
 
 ## Praxisbezug
